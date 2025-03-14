@@ -1,1 +1,224 @@
-{"data":[{"TaskID":1,"TaskName":"Individuazione del sito","StartDate":"2025-03-05T07:00:00.000Z","EndDate":"2025-03-07T16:00:00.000Z","Duration":3,"Progress":0,"color":"31","Predecessor":"","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":2,"TaskName":"Assunzione personale","StartDate":"2025-03-10T07:00:00.000Z","EndDate":"2025-03-11T16:00:00.000Z","Duration":2,"Progress":0,"color":"31","Predecessor":"1FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":3,"TaskName":"Stampa volantini","StartDate":"2025-03-12T07:00:00.000Z","EndDate":"2025-03-24T16:00:00.000Z","Duration":9,"Progress":0,"color":"","Predecessor":"2FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":4,"TaskName":"Dettagli ultimo minuto","StartDate":"2025-03-21T07:00:00.000Z","EndDate":"2025-03-21T16:00:00.000Z","Duration":1,"Progress":0,"color":"","Predecessor":"7FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":5,"TaskName":"Contatti con agenti di vendita","StartDate":"2025-03-10T07:00:00.000Z","EndDate":"2025-03-12T16:00:00.000Z","Duration":3,"Progress":0,"color":"","Predecessor":"1FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":6,"TaskName":"Affitto apparecchiature","StartDate":"2025-03-10T07:00:00.000Z","EndDate":"2025-03-12T16:00:00.000Z","Duration":3,"Progress":0,"color":"31","Predecessor":"1FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":7,"TaskName":"Prove generali","StartDate":"2025-03-19T07:00:00.000Z","EndDate":"2025-03-20T16:00:00.000Z","Duration":2,"Progress":0,"color":"","Predecessor":"9FS,8FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":8,"TaskName":"Preparazione dei trasporti","StartDate":"2025-03-12T07:00:00.000Z","EndDate":"2025-03-12T16:00:00.000Z","Duration":1,"Progress":0,"color":"31","Predecessor":"2FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":9,"TaskName":"Installazione impianto acustico","StartDate":"2025-03-13T07:00:00.000Z","EndDate":"2025-03-18T16:00:00.000Z","Duration":4,"Progress":0,"color":"31","Predecessor":"6FS,2FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"},{"TaskID":10,"TaskName":"Pubblicità radio e TV locale","StartDate":"2025-03-12T07:00:00.000Z","EndDate":"2025-03-13T16:00:00.000Z","Duration":2,"Progress":0,"color":"","Predecessor":"2FS","resources":[],"info":"<p><br></p>","DurationUnit":"day"}],"resources":[{"resourceId":"Team Member 1","resourceName":"Team Member 1"},{"resourceId":"Team Member 2","resourceName":"Team Member 2"},{"resourceId":"Team Member 3","resourceName":"Team Member 3"}],"projectStartDate":null,"projectEndDate":null,"advanced":{"columns":[{"name":"Task ID","width":"70","show":true},{"name":"Task Name","width":"350","show":true},{"name":"Start Date","width":"130","show":false},{"name":"End Date","width":"130","show":false},{"name":"Duration","width":"130","show":false},{"name":"Progress %","width":"150","show":false},{"name":"Dependency","width":"150","show":false},{"name":"Resources","width":"200","show":false},{"name":"Color","width":"100","show":false}],"zoomLevel":0,"timezone":"Europe/Rome","timezoneOffset":-60,"dependencyConflict":"Add Offset to Dependency","dateFormat":"yyyy-MM-dd","timeFormat":"HH:mm","firstDayOfWeek":0,"workWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"workTime":[{"from":8,"to":12},{"from":13,"to":17}],"holidays":[]}}
+{
+  "data": [
+    {
+      "TaskID": 1,
+      "TaskName": "Individuazione del sito",
+      "StartDate": "2025-03-05T07:00:00.000Z",
+      "EndDate": "2025-03-07T16:00:00.000Z",
+      "Duration": 3,
+      "Progress": 0,
+      "color": "31",
+      "Predecessor": "",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 2,
+      "TaskName": "Assunzione personale",
+      "StartDate": "2025-03-10T07:00:00.000Z",
+      "EndDate": "2025-03-11T16:00:00.000Z",
+      "Duration": 2,
+      "Progress": 0,
+      "color": "31",
+      "Predecessor": "1FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 3,
+      "TaskName": "Stampa volantini",
+      "StartDate": "2025-03-12T07:00:00.000Z",
+      "EndDate": "2025-03-24T16:00:00.000Z",
+      "Duration": 9,
+      "Progress": 0,
+      "color": "",
+      "Predecessor": "2FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 4,
+      "TaskName": "Dettagli ultimo minuto",
+      "StartDate": "2025-03-21T07:00:00.000Z",
+      "EndDate": "2025-03-21T16:00:00.000Z",
+      "Duration": 1,
+      "Progress": 0,
+      "color": "",
+      "Predecessor": "7FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 5,
+      "TaskName": "Contatti con agenti di vendita",
+      "StartDate": "2025-03-10T07:00:00.000Z",
+      "EndDate": "2025-03-12T16:00:00.000Z",
+      "Duration": 3,
+      "Progress": 0,
+      "color": "",
+      "Predecessor": "1FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 6,
+      "TaskName": "Affitto apparecchiature",
+      "StartDate": "2025-03-10T07:00:00.000Z",
+      "EndDate": "2025-03-12T16:00:00.000Z",
+      "Duration": 3,
+      "Progress": 0,
+      "color": "31",
+      "Predecessor": "1FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 7,
+      "TaskName": "Prove generali",
+      "StartDate": "2025-03-19T07:00:00.000Z",
+      "EndDate": "2025-03-20T16:00:00.000Z",
+      "Duration": 2,
+      "Progress": 0,
+      "color": "",
+      "Predecessor": "9FS,8FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 8,
+      "TaskName": "Preparazione dei trasporti",
+      "StartDate": "2025-03-12T07:00:00.000Z",
+      "EndDate": "2025-03-12T16:00:00.000Z",
+      "Duration": 1,
+      "Progress": 0,
+      "color": "31",
+      "Predecessor": "2FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 9,
+      "TaskName": "Installazione impianto acustico",
+      "StartDate": "2025-03-13T07:00:00.000Z",
+      "EndDate": "2025-03-18T16:00:00.000Z",
+      "Duration": 4,
+      "Progress": 0,
+      "color": "31",
+      "Predecessor": "6FS,2FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    },
+    {
+      "TaskID": 10,
+      "TaskName": "Pubblicità radio e TV locale",
+      "StartDate": "2025-03-12T07:00:00.000Z",
+      "EndDate": "2025-03-13T16:00:00.000Z",
+      "Duration": 2,
+      "Progress": 0,
+      "color": "",
+      "Predecessor": "2FS",
+      "resources": [],
+      "info": "<p><br></p>",
+      "DurationUnit": "day"
+    }
+  ],
+  "resources": [
+    {
+      "resourceId": "Team Member 1",
+      "resourceName": "Team Member 1"
+    },
+    {
+      "resourceId": "Team Member 2",
+      "resourceName": "Team Member 2"
+    },
+    {
+      "resourceId": "Team Member 3",
+      "resourceName": "Team Member 3"
+    }
+  ],
+  "projectStartDate": null,
+  "projectEndDate": null,
+  "advanced": {
+    "columns": [
+      {
+        "name": "Task ID",
+        "width": "70",
+        "show": true
+      },
+      {
+        "name": "Task Name",
+        "width": "350",
+        "show": true
+      },
+      {
+        "name": "Start Date",
+        "width": "130",
+        "show": false
+      },
+      {
+        "name": "End Date",
+        "width": "130",
+        "show": false
+      },
+      {
+        "name": "Duration",
+        "width": "130",
+        "show": false
+      },
+      {
+        "name": "Progress %",
+        "width": "150",
+        "show": false
+      },
+      {
+        "name": "Dependency",
+        "width": "150",
+        "show": false
+      },
+      {
+        "name": "Resources",
+        "width": "200",
+        "show": false
+      },
+      {
+        "name": "Color",
+        "width": "100",
+        "show": false
+      }
+    ],
+    "zoomLevel": 0,
+    "timezone": "Europe/Rome",
+    "timezoneOffset": -60,
+    "dependencyConflict": "Add Offset to Dependency",
+    "dateFormat": "yyyy-MM-dd",
+    "timeFormat": "HH:mm",
+    "firstDayOfWeek": 0,
+    "workWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "workTime": [
+      {
+        "from": 8,
+        "to": 12
+      },
+      {
+        "from": 13,
+        "to": 17
+      }
+    ],
+    "holidays": []
+  }
+}
