@@ -1,0 +1,124 @@
+{
+  "lineup": [
+      {
+          "band_name": "The Rolling Stones",
+          "track_name": "Paint It Black",
+          "track_duration": "00:03:45",
+          "order": 1
+      },
+      {
+          "band_name": "The Beatles",
+          "track_name": "Hey Jude",
+          "track_duration": "00:07:11",
+          "order": 2
+      },
+      {
+          "band_name": "Led Zeppelin",
+          "track_name": "Stairway to Heaven",
+          "track_duration": "00:08:02",
+          "order": 3
+      },
+      {
+          "band_name": "Queen",
+          "track_name": "Bohemian Rhapsody",
+          "track_duration": "00:05:55",
+          "order": 4
+      },
+      {
+          "band_name": "Pink Floyd",
+          "track_name": "Comfortably Numb",
+          "track_duration": "00:06:22",
+          "order": 5
+      },
+      {
+          "band_name": "Nirvana",
+          "track_name": "Smells Like Teen Spirit",
+          "track_duration": "00:05:01",
+          "order": 6
+      },
+      {
+          "band_name": "AC/DC",
+          "track_name": "Back In Black",
+          "track_duration": "00:04:15",
+          "order": 7
+      },
+      {
+          "band_name": "Metallica",
+          "track_name": "Enter Sandman",
+          "track_duration": "00:05:32",
+          "order": 8
+      },
+      {
+          "band_name": "U2",
+          "track_name": "With or Without You",
+          "track_duration": "00:04:56",
+          "order": 9
+      },
+      {
+          "band_name": "The Who",
+          "track_name": "Baba O'Riley",
+          "track_duration": "00:05:00",
+          "order": 10
+      },
+      {
+          "band_name": "Guns N' Roses",
+          "track_name": "Sweet Child O' Mine",
+          "track_duration": "00:05:56",
+          "order": 11
+      },
+      {
+          "band_name": "Red Hot Chili Peppers",
+          "track_name": "Californication",
+          "track_duration": "00:05:21",
+          "order": 12
+      },
+      {
+          "band_name": "Foo Fighters",
+          "track_name": "Everlong",
+          "track_duration": "00:04:10",
+          "order": 13
+      },
+      {
+          "band_name": "Radiohead",
+          "track_name": "Paranoid Android",
+          "track_duration": "00:03:58",
+          "order": 14
+      },
+      {
+          "band_name": "Coldplay",
+          "track_name": "Fix You",
+          "track_duration": "00:04:55",
+          "order": 15
+      },
+      {
+          "band_name": "Pearl Jam",
+          "track_name": "Alive",
+          "track_duration": "00:05:41",
+          "order": 16
+      },
+      {
+          "band_name": "The Killers",
+          "track_name": "Mr. Brightside",
+          "track_duration": "00:03:42",
+          "order": 17
+      },
+      {
+          "band_name": "Green Day",
+          "track_name": "Boulevard of Broken Dreams",
+          "track_duration": "00:04:20",
+          "order": 18
+      },
+      {
+          "band_name": "Linkin Park",
+          "track_name": "In the End",
+          "track_duration": "00:03:36",
+          "order": 19
+      },
+      {
+          "band_name": "Imagine Dragons",
+          "track_name": "Radioactive",
+          "track_duration": "00:03:07",
+          "order": 20
+      }
+  ]
+}
