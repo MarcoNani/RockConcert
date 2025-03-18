@@ -66,15 +66,9 @@ def print_track_in_order_nicely(lineup, interval=1.5):
         time_of_track = when_track(lineup, track_name, interval)
 
         print(f"{order:<10}{band_name:<30}{track_name:<30}{track_duration:<15}{time_of_track:<20}")
-    
-
-
-
 
 open_json()
 json_data = json.loads(DATI_JSON)
-
-
 
 lineup = json_data.get("lineup", [])
 
