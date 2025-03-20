@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import font as tkfont
+import json_fun
+
+DATI_JSON = "Nessun dato letto da json"
 
 class LoginTableApp(tk.Tk):
     """Applicazione principale con sistema di navigazione tra frame."""
@@ -124,28 +127,33 @@ class SearchTableFrame(tk.Frame):
         search_button = tk.Button(search_container, text="Cerca", 
                                  command=self.search_records)
         search_button.pack(side="left")
+
+        reset_button = tk.Button(search_container, text = "Reset",
+                                 command=self.reset_table)
+        
+        reset_button.pack(side="left")
         
         # Area per la tabella
         table_frame = tk.Frame(self, padx=20, pady=20)
         table_frame.pack(fill="both", expand=True)
         
         # Crea la tabella (Treeview)
-        columns = ("id", "nome", "cognome", "email", "telefono")
+        columns = ("band_name", "track_name", "track_duration", "time_before", "time_after")
         self.table = ttk.Treeview(table_frame, columns=columns, show="headings")
         
         # Definisci le intestazioni
-        self.table.heading("id", text="ID")
-        self.table.heading("nome", text="Nome")
-        self.table.heading("cognome", text="Cognome")
-        self.table.heading("email", text="Email")
-        self.table.heading("telefono", text="Telefono")
+        self.table.heading("band_name", text="Nome Band")
+        self.table.heading("track_name", text="Nome Traccia")
+        self.table.heading("track_duration", text="Durata Traccia")
+        self.table.heading("time_before", text="Tempo Prima")
+        self.table.heading("time_after", text="Tempo Dopo")
         
         # Definisci larghezza colonne
-        self.table.column("id", width=50)
-        self.table.column("nome", width=100)
-        self.table.column("cognome", width=100)
-        self.table.column("email", width=200)
-        self.table.column("telefono", width=120)
+        self.table.column("band_name", width=130)
+        self.table.column("track_name", width=150)
+        self.table.column("track_duration", width=100)
+        self.table.column("time_before", width=100)
+        self.table.column("time_after", width=100)
         
         # Aggiungi scrollbar
         scrollbar_y = ttk.Scrollbar(table_frame, orient="vertical", command=self.table.yview)
@@ -157,35 +165,34 @@ class SearchTableFrame(tk.Frame):
         scrollbar_x.pack(side="bottom", fill="x")
         self.table.pack(side="left", fill="both", expand=True)
         
-        # Popola la tabella con dati di esempio
+        # Popola la tabella con dati del json
         self.populate_table()
     
     def populate_table(self):
-        """Popola la tabella con dati di esempio."""
+        """Popola la tabella con dati del json."""
         # Cancella dati esistenti
         for i in self.table.get_children():
             self.table.delete(i)
             
-        # Dati di esempio
-        sample_data = [
-            (1, "Mario", "Rossi", "mario.rossi@example.com", "333-1234567"),
-            (2, "Luigi", "Verdi", "luigi.verdi@example.com", "333-7654321"),
-            (3, "Anna", "Bianchi", "anna.bianchi@example.com", "333-9876543"),
-            (4, "Giulia", "Neri", "giulia.neri@example.com", "333-3456789"),
-            (5, "Marco", "Gialli", "marco.gialli@example.com", "333-5678901"),
-            (6, "Laura", "Bruno", "laura.bruno@example.com", "333-1122334"),
-            (7, "Roberto", "Ferrari", "roberto.ferrari@example.com", "333-5566778"),
-            (8, "Sofia", "Esposito", "sofia.esposito@example.com", "333-9988776"),
-            (9, "Andrea", "Russo", "andrea.russo@example.com", "333-1234987"),
-            (10, "Chiara", "Romano", "chiara.romano@example.com", "333-6543219"),
-        ]
+        # Importa dati da JSON
+        lineup = json_fun.open_json()
+
+        # Ordina lineup per order
+        sorted_lineup = json_fun.sort_lineup(lineup)
         
         # Inserisci dati nella tabella
-        for record in sample_data:
-            self.table.insert("", "end", values=record)
+        for item in sorted_lineup:
+            values = (
+                item["band_name"],
+                item["track_name"],
+                item["track_duration"],
+                item.get("time_before", "N/A"),
+                item.get("time_after", "N/A")
+            )
+            self.table.insert("", "end", values=values)
         
         # Salva i dati originali per la funzionalità di ricerca
-        self.all_data = sample_data
+        self.all_data = sorted_lineup
     
     def search_records(self):
         """Cerca record nella tabella."""
@@ -198,15 +205,44 @@ class SearchTableFrame(tk.Frame):
         # Se non c'è termine di ricerca, mostra tutti i dati
         if not search_term:
             for record in self.all_data:
-                self.table.insert("", "end", values=record)
+                values = (
+                    record["band_name"],
+                    record["track_name"],
+                    record["track_duration"],
+                    record.get("time_before", "N/A"),
+                    record.get("time_after", "N/A")
+                )
+                self.table.insert("", "end", values=values)
             return
             
         # Altrimenti filtra i dati
         for record in self.all_data:
             # Converte tutti i valori in stringhe e controlla se il termine di ricerca è presente
-            if any(search_term in str(value).lower() for value in record):
-                self.table.insert("", "end", values=record)
-
+            if any(search_term in str(value).lower() for value in record.values()):
+                values = (
+                    record["band_name"],
+                    record["track_name"],
+                    record["track_duration"],
+                    record.get("time_before", "N/A"),
+                    record.get("time_after", "N/A")
+                )
+                self.table.insert("", "end", values=values)
+        # Removed the bad return statement that was causing the search to only return the first match
+    
+    def reset_table(self) :
+        # Cancella tutti i dati esistenti nella tabella
+        for i in self.table.get_children():
+            self.table.delete(i)
+        # Popola la tabella dei dati
+        for record in self.all_data:
+                values = (
+                    record["band_name"],
+                    record["track_name"],
+                    record["track_duration"],
+                    record.get("time_before", "N/A"),
+                    record.get("time_after", "N/A")
+                )
+                self.table.insert("", "end", values=values)
 
 if __name__ == "__main__":
     app = LoginTableApp()
