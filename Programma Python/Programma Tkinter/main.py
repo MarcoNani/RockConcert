@@ -230,9 +230,10 @@ class SearchTableFrame(tk.Frame):
         # Removed the bad return statement that was causing the search to only return the first match
     
     def reset_table(self) :
-        # Cancella tutti i dati esistenti nella tabella
+        # Cancella tutti i dati esistenti nella tabella e nella searchbox
         for i in self.table.get_children():
             self.table.delete(i)
+        self.search_entry.delete(0, tk.END)
         # Popola la tabella dei dati
         for record in self.all_data:
                 values = (
