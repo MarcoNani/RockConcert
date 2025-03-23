@@ -4,13 +4,11 @@ from datetime import datetime, timedelta
 START_TIME = timedelta(hours=21, minutes=0, seconds=0)
 
 def open_json():
-    """Apre il file JSON e restituisce i dati della lineup."""
     with open('../lineup.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
         return (data.get("lineup", []))
 
 def sort_lineup(lineup):
-    """Ordina la lineup in base all'attributo 'order'."""
     return sorted(lineup, key=lambda t: t["order"])
     
 def save_lineup(lineup_data):
@@ -25,8 +23,8 @@ def save_lineup(lineup_data):
     with open('../lineup.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
+# Returns when the track will be played after the start of the concert
 def when_track(lineup, trackName, default_interval=1.5):
-    """Calcola l'orario di esecuzione di un brano dopo l'inizio del concerto."""
     default_interval=timedelta(minutes=default_interval)
 
     timePassed = START_TIME

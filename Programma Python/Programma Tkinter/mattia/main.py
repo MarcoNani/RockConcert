@@ -141,11 +141,6 @@ class SearchTableFrame(tk.Frame):
                                  command=self.reset_table)
         reset_button.pack(side="left")
         
-        # Aggiungi pulsante per stampare la lineup (dalla versione 2)
-        print_button = tk.Button(search_container, text="Stampa Lineup", 
-                                 command=self.print_lineup)
-        print_button.pack(side="left", padx=(10, 0))
-        
         # Salva modifiche (visibile solo per admin)
         self.save_button = tk.Button(search_container, text="Salva Modifiche",
                                 command=self.save_changes, state=tk.DISABLED)
@@ -165,15 +160,14 @@ class SearchTableFrame(tk.Frame):
         self.table.heading("band_name", text="Nome Band")
         self.table.heading("track_name", text="Nome Traccia")
         self.table.heading("track_duration", text="Durata Traccia")
-        self.table.heading("hour_track", text="Orario Esecuzione")
+        self.table.heading("hour_track", text="Orario Esecuzione")  # Aggiungi questa riga
         self.table.heading("time_before", text="Tempo Prima")
         self.table.heading("time_after", text="Tempo Dopo")        
-        
         # Definisci larghezza colonne
         self.table.column("band_name", width=130)
         self.table.column("track_name", width=150)
         self.table.column("track_duration", width=100)
-        self.table.column("hour_track", width=100)
+        self.table.heading("hour_track", width=100)
         self.table.column("time_before", width=100)
         self.table.column("time_after", width=100)
         
@@ -306,7 +300,6 @@ class SearchTableFrame(tk.Frame):
                 item.get("time_after", "N/A")
             )
             self.table.insert("", "end", values=values)
-            
     def update_table_for_user(self, is_admin):
         """Aggiorna la tabella in base ai privilegi dell'utente."""
         self.is_admin_view = is_admin
@@ -356,7 +349,6 @@ class SearchTableFrame(tk.Frame):
         
         # Salva i dati originali per la funzionalità di ricerca
         self.all_data = sorted_lineup
-        
     def search_records(self):
         """Cerca record nella tabella."""
         search_term = self.search_entry.get().lower()
@@ -398,7 +390,6 @@ class SearchTableFrame(tk.Frame):
                     record.get("time_after", "N/A")
                 )
                 self.table.insert("", "end", values=values)
-                
     def reset_table(self):
         """Resetta la tabella allo stato originale."""
         self.search_entry.delete(0, tk.END)  # Cancella il testo di ricerca
@@ -413,33 +404,6 @@ class SearchTableFrame(tk.Frame):
             self.save_button.config(state=tk.DISABLED)
         except Exception as e:
             messagebox.showerror("Errore", f"Impossibile salvare le modifiche: {str(e)}")
-            
-    def print_lineup(self):
-        """Stampa la lineup del concerto."""
-        try:
-            # Genera il testo da stampare
-            text_to_print = "Lineup del Concerto:\n\n"
-            text_to_print += f"{'Band Name':<30} {'Track Name':<30} {'Track Duration':<15} {'Orario':<15} {'Time Before':<15} {'Time After':<15}\n"
-            text_to_print += "-" * 120 + "\n"
-            
-            for record in self.all_data:
-                # Calcola l'orario di esecuzione del brano
-                hour_track = json_fun.when_track(self.all_data, record["track_name"])
-                
-                text_to_print += (
-                f"{record.get('band_name', ''):<30} "
-                f"{record.get('track_name', ''):<30} "
-                f"{record.get('track_duration', ''):<15} "
-                f"{hour_track:<15} "
-                f"{record.get('time_before', 'N/A'):<15} "
-                f"{record.get('time_after', 'N/A'):<15}\n"
-                )
-            
-            # Stampa a console (puoi sostituire con una vera funzione di stampa)
-            print(text_to_print)
-            messagebox.showinfo("Stampa", "Lineup inviata alla stampa!")
-        except Exception as e:
-            messagebox.showerror("Errore di stampa", f"Impossibile stampare la lineup: {str(e)}")
 
 
 if __name__ == "__main__":
