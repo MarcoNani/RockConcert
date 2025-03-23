@@ -10,7 +10,7 @@ class LoginTableApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Login & Tabella App")
-        self.geometry("800x600")
+        self.geometry("900x600")
         
         # Dizionario utenti (in un'app reale, dovrebbe essere un database)
         self.users = {"admin": "password123", "user": "password"}
@@ -167,26 +167,28 @@ class SearchTableFrame(tk.Frame):
         table_frame.pack(fill="both", expand=True)
         
         # Crea la tabella (Treeview)
-        self.columns = ("band_name", "track_name", "track_duration", "hour_track", "time_before", "time_after")
+        self.columns = ("band_name", "track_name", "track_duration", "hour_track", "time_from_start", "time_before", "time_after")
         self.admin_columns = self.columns + ("order_controls",)
-        
+
         self.table = ttk.Treeview(table_frame, columns=self.columns, show="headings")
-        
+
         # Definisci le intestazioni
         self.table.heading("band_name", text="Nome Band")
         self.table.heading("track_name", text="Nome Traccia")
         self.table.heading("track_duration", text="Durata Traccia")
         self.table.heading("hour_track", text="Orario Esecuzione")
-        self.table.heading("time_before", text="Tempo Prima")
-        self.table.heading("time_after", text="Tempo Dopo")        
+        self.table.heading("time_from_start", text="Tempo dall'Inizio")
+        self.table.heading("time_before", text="Prima")
+        self.table.heading("time_after", text="Dopo")        
         
         # Definisci larghezza colonne
         self.table.column("band_name", width=130)
         self.table.column("track_name", width=150)
         self.table.column("track_duration", width=100)
         self.table.column("hour_track", width=100)
-        self.table.column("time_before", width=100)
-        self.table.column("time_after", width=100)
+        self.table.column("time_from_start", width=100)
+        self.table.column("time_before", width=70)
+        self.table.column("time_after", width=70)
         
         # Aggiungi scrollbar
         scrollbar_y = ttk.Scrollbar(table_frame, orient="vertical", command=self.table.yview)
@@ -307,12 +309,15 @@ class SearchTableFrame(tk.Frame):
         for item in sorted_data:
             # Calcola l'orario di esecuzione del brano
             hour_track = json_fun.when_track(sorted_data, item["track_name"])
+            # Calcola il tempo dall'inizio
+            time_from_start = self.calculate_time_from_start(sorted_data, hour_track)
             
             values = (
                 item.get("band_name", ""),
                 item.get("track_name", ""),
                 item.get("track_duration", ""),
-                hour_track,  # Aggiungo l'orario calcolato
+                hour_track,
+                time_from_start,  # Aggiunta del nuovo campo
                 item.get("time_before", "N/A"),
                 item.get("time_after", "N/A")
             )
@@ -354,12 +359,15 @@ class SearchTableFrame(tk.Frame):
             
             # Calcola l'orario di esecuzione del brano
             hour_track = json_fun.when_track(sorted_lineup, item["track_name"])
+            # Calcola il tempo dall'inizio
+            time_from_start = self.calculate_time_from_start(sorted_lineup, hour_track)
                 
             values = (
                 item.get("band_name", ""),
                 item.get("track_name", ""),
                 item.get("track_duration", ""),
-                hour_track,  # Aggiungo l'orario calcolato
+                hour_track,
+                time_from_start,  # Aggiunta del nuovo campo
                 item.get("time_before", "N/A"),
                 item.get("time_after", "N/A")
             )
@@ -381,12 +389,15 @@ class SearchTableFrame(tk.Frame):
             for record in self.all_data:
                 # Calcola l'orario di esecuzione del brano
                 hour_track = json_fun.when_track(self.all_data, record["track_name"])
+                # Calcola il tempo dall'inizio
+                time_from_start = self.calculate_time_from_start(self.all_data, hour_track)
                 
                 values = (
                     record.get("band_name", ""),
                     record.get("track_name", ""),
                     record.get("track_duration", ""),
-                    hour_track,  # Aggiungo l'orario calcolato
+                    hour_track,
+                    time_from_start,  # Aggiunta del nuovo campo
                     record.get("time_before", "N/A"),
                     record.get("time_after", "N/A")
                 )
@@ -399,12 +410,15 @@ class SearchTableFrame(tk.Frame):
             if any(search_term in str(value).lower() for value in record.values()):
                 # Calcola l'orario di esecuzione del brano
                 hour_track = json_fun.when_track(self.all_data, record["track_name"])
+                # Calcola il tempo dall'inizio
+                time_from_start = self.calculate_time_from_start(self.all_data, hour_track)
                 
                 values = (
                     record.get("band_name", ""),
                     record.get("track_name", ""),
                     record.get("track_duration", ""),
-                    hour_track,  # Aggiungo l'orario calcolato
+                    hour_track,
+                    time_from_start,  # Aggiunta del nuovo campo
                     record.get("time_before", "N/A"),
                     record.get("time_after", "N/A")
                 )
@@ -434,23 +448,54 @@ class SearchTableFrame(tk.Frame):
                 messagebox.showerror("Errore", "Nessuna stampante selezionata")
                 return
                 
-            # Genera il testo da stampare
+            # Definisci larghezza colonne
+            col_widths = {
+                "band": 20,
+                "track": 25, 
+                "duration": 8,
+                "time": 8,
+                "from_start": 6,
+                "before": 8,
+                "after": 8
+            }
+                
+            # Genera il testo da stampare con colonne separate da |
             text_to_print = "Lineup del Concerto:\n\n"
-            text_to_print += f"{'Band Name':<30} {'Track Name':<30} {'Track Duration':<15} {'Orario':<15} {'Time Before':<15} {'Time After':<15}\n"
-            text_to_print += "-" * 120 + "\n"
+            
+            # Intestazione con separatori verticali
+            text_to_print += f"| {'Band':<{col_widths['band']}} | {'Track':<{col_widths['track']}} | {'Durata':<{col_widths['duration']}} "
+            text_to_print += f"| {'Orario':<{col_widths['time']}} | {'Inizio':<{col_widths['from_start']}} | {'Prima':<{col_widths['before']}} | {'Dopo':<{col_widths['after']}} |\n"
+            
+            # Linea separatrice
+            separator = "+"
+            for width in col_widths.values():
+                separator += "-" * (width + 2) + "+"
+            text_to_print += separator + "\n"
             
             for record in self.all_data:
                 # Calcola l'orario di esecuzione del brano
                 hour_track = json_fun.when_track(self.all_data, record["track_name"])
                 
+                # Calcola tempo dall'inizio
+                time_from_start = self.calculate_time_from_start(self.all_data, hour_track)
+                
+                # Tronca i nomi lunghi per evitare problemi di formattazione
+                band_name = record.get('band_name', '')[:col_widths['band']]
+                track_name = record.get('track_name', '')[:col_widths['track']]
+                
+                # Riga dati con separatori verticali
                 text_to_print += (
-                f"{record.get('band_name', ''):<30} "
-                f"{record.get('track_name', ''):<30} "
-                f"{record.get('track_duration', ''):<15} "
-                f"{hour_track:<15} "
-                f"{record.get('time_before', 'N/A'):<15} "
-                f"{record.get('time_after', 'N/A'):<15}\n"
+                    f"| {band_name:<{col_widths['band']}} "
+                    f"| {track_name:<{col_widths['track']}} "
+                    f"| {record.get('track_duration', ''):<{col_widths['duration']}} "
+                    f"| {hour_track:<{col_widths['time']}} "
+                    f"| {time_from_start:<{col_widths['from_start']}} "
+                    f"| {record.get('time_before', 'N/A'):<{col_widths['before']}} "
+                    f"| {record.get('time_after', 'N/A'):<{col_widths['after']}} |\n"
                 )
+            
+            # Linea finale
+            text_to_print += separator
             
             # Print to the selected printer
             printer_module.print_to_whatever(text_to_print, printer_name=selected_printer)
@@ -468,6 +513,62 @@ class SearchTableFrame(tk.Frame):
             # Try to set Microsoft Print to PDF as default if it exists
             pdf_index = next((i for i, p in enumerate(printers) if "PDF" in p), 0)
             self.printer_combobox.current(pdf_index)
+            
+    # Aggiunta dei metodi per gestire il tempo dall'inizio del concerto
+
+    def time_to_minutes(self, time_str):
+        """Converte un formato di tempo in minuti totali, supportando vari formati."""
+        if not time_str or ":" not in time_str:
+            return None
+            
+        parts = time_str.split(':')
+        
+        try:
+            if len(parts) == 3:  # HH:MM:SS
+                return int(parts[0]) * 60 + int(parts[1])
+            elif len(parts) == 2:  # MM:SS o HH:MM
+                # Per semplicità, assumiamo che sia nel formato HH:MM
+                return int(parts[0]) * 60 + int(parts[1])
+            else:
+                return None
+        except ValueError:
+            return None
+
+    def calculate_time_from_start(self, lineup, current_time):
+        """Calcola il tempo trascorso dall'inizio del concerto."""
+        if not lineup or not current_time:
+            return "N/A"
+        
+        # Ottieni l'orario del primo brano (inizio concerto)
+        first_track = lineup[0]
+        start_time = json_fun.when_track(lineup, first_track["track_name"])
+        
+        # Se non c'è un orario valido, ritorna N/A
+        if not start_time or ":" not in start_time:
+            return "N/A"
+        
+        try:
+            # Normalizza entrambi i formati temporali a minuti
+            start_minutes = self.time_to_minutes(start_time)
+            current_minutes = self.time_to_minutes(current_time)
+            
+            if start_minutes is None or current_minutes is None:
+                return "N/A"
+            
+            # Calcola differenza in minuti
+            diff_minutes = current_minutes - start_minutes
+            
+            # Se negativo, potrebbe essere il giorno dopo o un errore
+            if diff_minutes < 0:
+                return "N/A"
+                
+            # Formatta come HH:MM
+            hours = diff_minutes // 60
+            minutes = diff_minutes % 60
+            return f"{hours:02d}:{minutes:02d}"
+        except Exception as e:
+            print(f"Errore nel calcolo del tempo: {e}")
+            return "N/A"
 
 
 if __name__ == "__main__":
