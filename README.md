@@ -38,6 +38,7 @@ L'applicazione permette di svolgere le attività mostrate nello use case diagram
 L'applicazione permete quindi l'accesso a due tipologie di utenti:
 - Organizzazione
 - Membro dello staff
+
 I primi hanno i privilegi necessari per eseguire il CRUD sulle tracce mentre i membri dello staf possono solamente visualizzare e stampare la scaletta del concerto.
 
 L'applicazione all'avvio mostra una maschera per farsi riconoscere dal sistema. Una volta autenticati viene mostrata la scaletta del concerto e si ha la possibilità di effettuare il CRUD sulle tracce (se si è organizzatori).
