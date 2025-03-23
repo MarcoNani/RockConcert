@@ -10,13 +10,13 @@ Analizzando il diagramma di Gantt abbiamo stabilito che il numero minimo di gior
 
 ### Attvità che incrementano la durata del progetto
 Analizzando ulteriormente il diagramma abbiamo stabilito che le attività che incrementano la data del progetto sarebbero le seguenti:
-1. Individuazione del sito
-2. Assunzione del personale
-4. Dettagli ultimo minuto
-6. Affitto apparecchiature
-7. Prove generali
-8. Preparazione dei trasporti
-9. Installazione impianto acustico
+- Individuazione del sito
+- Assunzione del personale
+- Dettagli ultimo minuto
+- Affitto apparecchiature
+- Prove generali
+- Preparazione dei trasporti
+- Installazione impianto acustico
 
 ### Cosa succede se la tipografia consegna i volantini in ritardo
 Abbiamo inoltre analizzato cosa succede se la tipografia consegna i volantini in ritardo (la durata dell'attività va da 5 a 9 giorni):
@@ -38,6 +38,7 @@ L'applicazione permette di svolgere le attività mostrate nello use case diagram
 L'applicazione permete quindi l'accesso a due tipologie di utenti:
 - Organizzazione
 - Membro dello staff
+
 I primi hanno i privilegi necessari per eseguire il CRUD sulle tracce mentre i membri dello staf possono solamente visualizzare e stampare la scaletta del concerto.
 
 L'applicazione all'avvio mostra una maschera per farsi riconoscere dal sistema. Una volta autenticati viene mostrata la scaletta del concerto e si ha la possibilità di effettuare il CRUD sulle tracce (se si è organizzatori).
