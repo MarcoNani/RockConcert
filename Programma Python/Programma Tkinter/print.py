@@ -9,11 +9,11 @@ import win32gui
 
 def print_to_whatever(text_to_print, printer_name="Microsoft Print to PDF"):
     """
-    Prints text to Microsoft Print to PDF using proper DC context.
+    Prints text to the specified printer using proper DC context.
     
     Args:
         text_to_print (str): The text to be printed
-        pdf (bool): If True, prints to PDF, otherwise prints to default printer
+        printer_name (str): Name of the printer to use, defaults to "Microsoft Print to PDF"
     
     Returns:
         None

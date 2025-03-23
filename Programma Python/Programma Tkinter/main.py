@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import font as tkfont
 import json_fun
+import print as printer_module
 
 class LoginTableApp(tk.Tk):
     """Applicazione principale con sistema di navigazione tra frame."""
@@ -145,6 +146,16 @@ class SearchTableFrame(tk.Frame):
         print_button = tk.Button(search_container, text="Stampa Lineup", 
                                  command=self.print_lineup)
         print_button.pack(side="left", padx=(10, 0))
+        
+        # Add printer selection combobox
+        printer_label = tk.Label(search_container, text="Stampante:")
+        printer_label.pack(side="left", padx=(10, 0))
+        
+        self.printer_combobox = ttk.Combobox(search_container, width=20, state="readonly")
+        self.printer_combobox.pack(side="left", padx=(5, 0))
+        
+        # Load available printers
+        self.load_printers()
         
         # Salva modifiche (visibile solo per admin)
         self.save_button = tk.Button(search_container, text="Salva Modifiche",
@@ -417,6 +428,12 @@ class SearchTableFrame(tk.Frame):
     def print_lineup(self):
         """Stampa la lineup del concerto."""
         try:
+            # Get the selected printer
+            selected_printer = self.printer_combobox.get()
+            if not selected_printer:
+                messagebox.showerror("Errore", "Nessuna stampante selezionata")
+                return
+                
             # Genera il testo da stampare
             text_to_print = "Lineup del Concerto:\n\n"
             text_to_print += f"{'Band Name':<30} {'Track Name':<30} {'Track Duration':<15} {'Orario':<15} {'Time Before':<15} {'Time After':<15}\n"
@@ -435,11 +452,22 @@ class SearchTableFrame(tk.Frame):
                 f"{record.get('time_after', 'N/A'):<15}\n"
                 )
             
-            # Stampa a console (puoi sostituire con una vera funzione di stampa)
-            print(text_to_print)
-            messagebox.showinfo("Stampa", "Lineup inviata alla stampa!")
+            # Print to the selected printer
+            printer_module.print_to_whatever(text_to_print, printer_name=selected_printer)
+            messagebox.showinfo("Stampa", f"Lineup inviata alla stampante: {selected_printer}")
         except Exception as e:
             messagebox.showerror("Errore di stampa", f"Impossibile stampare la lineup: {str(e)}")
+            
+    def load_printers(self):
+        """Load available printers into the combobox."""
+        printers = printer_module.get_printers()
+        self.printer_combobox['values'] = printers
+        
+        # Set default selection to the first printer (or PDF)
+        if printers:
+            # Try to set Microsoft Print to PDF as default if it exists
+            pdf_index = next((i for i, p in enumerate(printers) if "PDF" in p), 0)
+            self.printer_combobox.current(pdf_index)
 
 
 if __name__ == "__main__":
