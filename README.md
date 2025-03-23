@@ -1,5 +1,7 @@
 # Relazione gestione attività concerto rock
 
+[Pagina degli screenshots](./Programma%20Python/SCREENSHOTS.md)
+
 ## Organizzazione concerto rock
 Si vuole organizzare un concerto rock. Dopo un'analisi delle attività necessarie si è stabilito che per la realizzazione di quest'ultimo sono necessarie le attività illustrate di seguito nel diagramma di Gantt.
 ![Diagramma di Gantt](./Parte%20progettuale/Gantt.png)
