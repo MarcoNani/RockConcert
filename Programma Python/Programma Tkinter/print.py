@@ -7,7 +7,7 @@ import win32ui
 import win32con
 import win32gui
 
-def print_to_pdf(text_to_print, printer_name="Microsoft Print to PDF"):
+def print_to_whatever(text_to_print, printer_name="Microsoft Print to PDF"):
     """
     Prints text to Microsoft Print to PDF using proper DC context.
     
@@ -33,19 +33,19 @@ def print_to_pdf(text_to_print, printer_name="Microsoft Print to PDF"):
     
     # Select a font
     font = win32ui.CreateFont({
-        "name": "Arial",
+        "name": "Consolas",
         "height": 220,  # Size in logical units
         "weight": 400,  # Normal weight
     })
     dc.SelectObject(font)
     
     # Calculate positions (72 points per inch, 20 twips per point)
-    y_pos = -1000  # Start position (top margin)
-    left_margin = 1000  # Left margin
+    y_pos = -500  # Start position (top margin)
+    left_margin = 500  # Left margin
     
     # Print each line of text
     for line in text_to_print.split('\n'):
-        y_pos -= 400  # Line spacing
+        y_pos -= 200  # Line spacing
         dc.TextOut(left_margin, y_pos, line)
     
     dc.EndPage()
@@ -78,4 +78,4 @@ if __name__ == "__main__":
     
 
     text_to_print = "Hello, world!\nThis is a test document.\nIt should work with PDF."
-    print_to_pdf(text_to_print, printer_name=printers[3])
+    print_to_whatever(text_to_print, printer_name=printers[3])
