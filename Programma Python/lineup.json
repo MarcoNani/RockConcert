@@ -1,17 +1,17 @@
 {
     "lineup": [
         {
-            "band_name": "The Rolling Stones",
-            "track_name": "Paint It Black",
-            "track_duration": "00:03:45",
+            "band_name": "The Beatles",
+            "track_name": "Hey Jude",
+            "track_duration": "00:07:11",
             "time_before": "00:01:25",
             "time_after": "00:01:00",
             "order": 1
         },
         {
-            "band_name": "The Beatles",
-            "track_name": "Hey Jude",
-            "track_duration": "00:07:11",
+            "band_name": "The Rolling Stones",
+            "track_name": "Paint It Black",
+            "track_duration": "00:03:45",
             "time_before": "00:01:25",
             "time_after": "00:01:00",
             "order": 2
@@ -161,5 +161,4 @@
             "order": 20
         }
     ]
-  }
-  
+}
