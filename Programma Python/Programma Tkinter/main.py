@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import font as tkfont
 import json_fun
+import print
 
 DATI_JSON = "Nessun dato letto da json"
 
@@ -133,6 +134,11 @@ class SearchTableFrame(tk.Frame):
         
         reset_button.pack(side="left")
         
+        # Aggiungi pulsante per stampare la lineup
+        print_button = tk.Button(search_container, text="Stampa Lineup", 
+                                 command=self.print_lineup)
+        print_button.pack(side="left", padx=(10, 0))
+        
         # Area per la tabella
         table_frame = tk.Frame(self, padx=20, pady=20)
         table_frame.pack(fill="both", expand=True)
@@ -244,6 +250,24 @@ class SearchTableFrame(tk.Frame):
                     record.get("time_after", "N/A")
                 )
                 self.table.insert("", "end", values=values)
+    
+    def print_lineup(self):
+        """Stampa la lineup del concerto."""
+        # Genera il testo da stampare
+        text_to_print = "Lineup del Concerto:\n\n"
+        text_to_print += f"{'Band Name':<30} {'Track Name':<30} {'Track Duration':<15} {'Time Before':<15} {'Time After':<15}\n"
+        text_to_print += "-" * 105 + "\n"
+        for record in self.all_data:
+            text_to_print += (
+            f"{record['band_name']:<30} "
+            f"{record['track_name']:<30} "
+            f"{record['track_duration']:<15} "
+            f"{record.get('time_before', 'N/A'):<15} "
+            f"{record.get('time_after', 'N/A'):<15}\n"
+            )
+        
+        # Usa la funzione di stampa
+        print.print_to_whatever(text_to_print)
 
 if __name__ == "__main__":
     app = LoginTableApp()
