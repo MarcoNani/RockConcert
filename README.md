@@ -73,6 +73,11 @@ L'applicazione all'avvio mostra una maschera per farsi riconoscere dal sistema. 
 
 Le tracce vengono lette e salvate su disco tramite un file JSON.
 
+#### Possibilità di stampare la scaletta
+> Grazie a due librerie diverse, è possibile selezionare una stampante e avviare una stampa della scaletta direttamente dalla applicazione!
+![Stampa Scaletta](./Programma%20Python/screenshots/13-print.png)
+![Stampa riuscita](./Programma%20Python/screenshots/14-print_successful.png)
+
 ### Vista dell'App per Utenti
 > Gli utenti dello staff possono accedere con una schermata dedicata.  
 ![User login](./Programma%20Python/screenshots/9-login_user.png)
