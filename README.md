@@ -1,3 +1,5 @@
+<center><img src="./Programma%20Python/screenshots/icon.png" alt="Icona" width="150"></center>
+
 # Relazione gestione attività concerto rock
 
 ## Organizzazione concerto rock

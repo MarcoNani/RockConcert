@@ -9,8 +9,12 @@ class LoginTableApp(tk.Tk):
     
     def __init__(self):
         super().__init__()
-        self.title("Login & Tabella App")
+        self.title("RockConcert Manager")
         self.geometry("900x600")
+
+        # Aggiungi icona
+        icon = tk.PhotoImage(file="../screenshots/icon.png")
+        self.iconphoto(True, icon)
         
         # Dizionario utenti (in un'app reale, dovrebbe essere un database)
         self.users = {"admin": "password123", "user": "password"}
